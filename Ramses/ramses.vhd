@@ -17,8 +17,34 @@ end entity ramses;
 architecture Behavioral of ramses is
 	constant ROWS : integer := 7;
 	constant COLS : integer := 5;
+	type pos_color_4 is array (0 to 3) of
+		 std_logic_vector(0 to 2);
+	type states is (INIT, PLAYER1, INCREASE_PLAYER1);
+	signal state: states := INIT;
+	signal tresors_pos : pos_color_4;
+	signal counter1 : integer range 0 to 2 := 0;
+	signal counter2 : integer range 0 to 2 := 0;
 	
 begin
+	main: process(clock1)
+		begin
+			if(rising_edge(clock1)) then
+				case state is
+					when INIT => 
+					tresors_pos <= ((2,1,0),
+									(2,3,0), 
+									(5,4,1), 
+									(3,4,1));
+					state <= PLAYER1;
+
+					when PLAYER1 =>
+					if(UP = 0)
+
+	
+	reset: process(clock1)
+		begin
+			if(reset = 1) then
+				state <= INIT
 	
 	
 end architecture Behavioral;
