@@ -5,29 +5,27 @@ entity LED_MATRIX is
     port (
         clk : in std_logic;
         led_col : out std_logic_vector(4 downto 0);  -- Signals for LED rows
-        led_row : out std_logic_vector(6 downto 0)   -- Signals for LED columns
+        led_row : out std_logic_vector(6 downto 0);   -- Signals for LED columns
+		  button_up : in std_logic
     );
 end entity LED_MATRIX;
 
 architecture Behavioral of LED_MATRIX is
-    signal row_state : std_logic := '0';  -- Variable d'état pour alterner entre les 2 configurations de lignes
-                                            
+    shared variable i : integer := 6;  -- Variable de estado para alternar entre las dos configuraciones de fila
+
 begin
     -- Process to control LED matrix
     LED_PROCESS: process(clk)
     begin
         if rising_edge(clk) then
-            -- Allumer les led en diagonale (ligne 1, colonne 2 et ligne 2, colonne 1)
-            if row_state = '0' then
-                led_row <= "0000001";  -- led_row est un tableau ou chaque bit correspond à une ligne avec le 1er bit = row7
-                led_col <= "00010";  -- Column 2 is enabled
-            else
-                led_row <= "0000010";
-                led_col <= "00001";
-            end if;
-            
-            -- On alterne l'état de la ligne pour la prochaine itération
-            row_state <= not row_state;
+            -- Encender los LEDs en diagonal (fila 1, columna 3 y fila 2, columna 4)
+                led_row <= "1000000";  -- Start with the rightmost LED (led_row[0])
+                led_col <= "01111";  -- Columns 3 and 4 are enabled
+					 if button_up = '1' then
+						led_row(i) <= '0';
+						led_row(i-1) <= '1';
+						i := i-1;
+					end if;
         end if;
     end process LED_PROCESS;
 
