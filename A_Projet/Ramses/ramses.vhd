@@ -2,126 +2,285 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity ramses is port(
+entity matrix_test is port(  
+
 	-- clocks
 	clock0 : in std_logic;
-	clock1 : in std_logic; -- Un clock c'est pour verifier les inputs chaque fois et l'autre c'est pour la partie sequentiel
+	clock1 : in std_logic;
 	
 	-- Inputs
-	buttons : in std_logic_vector(0 to 3) := "0000"; -- Ici il y avais 3 zeros, on doit avoir 4 car on doit compter le bit 0.
-	-- bit0: UP, bit1 right, bit2: down, bit3: left
-	reset : in std.logic; --Juste un bouton reset
+	buttons : in std_logic_vector(0 to 3); -- up, right, down, left
+	reset_button : in std_logic; --bouton reset
 
-	-- Position outputs
-	first_7segment : out std_logic_vector(3 downto 0); -- Ici c'est le display du points pour chaque joueur
-	second_7segment : out std_logic_vector(3 downto 0);
-	rows_matrix : out std_logic_vector(0 to 6); -- These are the signals to turn on the matrix leds right?
-	cols_matrix : out std_logic_vector(0 to 4);
-	player1_wins : out std_logic;
-	player2_wins : out std_logic
+	-- outputs
+	led_col_green : out std_logic_vector(4 downto 0);
+   led_col_red : out std_logic_vector(4 downto 0);
+   led_row : out std_logic_vector(6 downto 0);
+	led_current_player : out std_logic_vector(1 downto 0) -- 0 player_red
+	--first_7segment : out std_logic_vector(3 downto 0); 
+	--second_7segment : out std_logic_vector(3 downto 0);
 );
-end entity ramses;
+end entity matrix_test;
 
-architecture Behavioral of ramses is
-	constant ROWS : integer := 7;
-	constant COLS : integer := 5;
-	type pos_color_4 is array (0 to 3) of
-		 std_logic_vector(0 to 2);
-	type states is (INIT, PLAYER1, INCREASE_PLAYER1);
+architecture Behavioral of matrix_test is
+	
+	
+	-- def nouv types
+	type states is (INIT, PLAYER_TURN, BLINK_LED, CHECK_TRESORS, REMOVE_TRESOR, INCREASE_PLAYER, END_GAME, MOVE_UP, MOVE_RIGHT, MOVE_DOWN, MOVE_LEFT);
+	type pos_array_4_row is array (0 to 3) of integer range 0 to 6;  -- pour les rows
+	type pos_array_4_col is array (0 to 3) of integer range 0 to 4;   -- pour les col red/green
+	type pos_array_4_bool is array (0 to 3) of boolean;
+	type player_array_2 is array (0 to 1) of integer range 0 to 2;
+	type player_array_2_row is array (0 to 1) of integer range 0 to 6;
+	type player_array_2_col is array (0 to 1) of integer range 0 to 4;
+	type array_counter is array (0 to 1) of integer range 0 to 2;
+	
+	-- declaration signaux
 	signal state: states := INIT;
-	signal tresors_pos : pos_color_4;
-	signal pos_row_1 : integer range 0 to 6 := 0;
-	signal pos_row_2 : integer range 0 to 6 := 0;
-	signal pos_col_1 : integer range 0 to 4 := 0;
-	signal pos_col_2 : integer range 0 to 4 := 0;
-	signal counter1 : integer range 0 to 2 := 0;
-	signal counter2 : integer range 0 to 2 := 0;
+	signal tresors_pos_row : pos_array_4_row := (3, 6,4 , 3);  -- rouge1, vert1, rouge2, vert2
+	signal tresors_pos_col : pos_array_4_col := (1, 1, 2, 2); --idem
+	signal tresors_discover : pos_array_4_bool;         --idem
+	signal counters : array_counter;
 	
+	
+	signal pos_row_players : player_array_2_row;
+   signal pos_col_players : player_array_2_col;
+	
+	signal fast_counter : integer range 0 to 6; -- pour display la matrice
+	signal new_user_command : boolean := true;
+	signal color_blink_players : player_array_2;
+	signal case_color : integer range 0 to 1; -- 0 pour red et 1 pour green
+	signal current_player: integer range 0 to 1;
+	     
 begin
-	main: process(clock1)
-		begin
-			if(rising_edge(clock1)) then
-				case state is
-					when INIT => 
 
-					tresors_pos <= (("010","001","000", "0"), -- valeur au pif à remplacer par des valeurs aléatoires par la suite
-									("010","011","000", "0"), 
-									("101","100","001", "0"), 
-									("011","100","001", "0"));
+	DISPLAY: process(clock0)
+	variable first_it : boolean;
+	variable add : integer := 0;
+	
+	begin
+		if rising_edge(clock0) then 
+		
+			led_current_player(current_player) <= '1'; -- A TESTER
+			
+			-- AFFICHAGE SEGMENT DISPLAY
+			-- ......
+			
+			
+			-- balayage lignes
+			led_row <= (others => '0') ;
+			led_col_red <= (others => '1') ;
+			led_col_green <= (others => '1') ;
+		
+			if(fast_counter = pos_row_players(current_player)) then
+				led_row(fast_counter) <= '1' ;
+				
+				if(color_blink_players(current_player) = 1) then
+					led_col_red(pos_col_players(current_player)) <= '0' ;
+				
+				elsif(color_blink_players(current_player) = 2) then
+					led_col_green(pos_col_players(current_player)) <= '0' ;
+				end if;
+			end if;
+		
+			-- affiche autre player immobile
+			if(fast_counter = pos_row_players(1 - current_player)) then
+				led_row(fast_counter) <= '1' ;
+				if(current_player = 0) then
+					led_col_green(pos_col_players(1 - current_player)) <= '0';
+				elsif(current_player = 1) then
+					led_col_red(pos_col_players(1 - current_player)) <= '0';
+				end if;
+			end if;
+		
+	    	
+			
+			-- affichage des tresors découverts en 2 tours sinon trop long
+			first_it := true;
+			tresors_display : for k in 0 to 1 loop
+				if(fast_counter = tresors_pos_row(k+add) and tresors_discover(k+add) and (tresors_pos_col(k+add) /= pos_col_players(current_player) or tresors_pos_row(k+add) /= pos_row_players(current_player)) and (tresors_pos_col(k+add) /= pos_col_players(1-current_player) or tresors_pos_row(k+add) /= pos_row_players(1-current_player))) then
+					if(first_it) then
+						led_row(fast_counter) <= '1' ;
+						first_it := false;
+					end if;
+					led_col_green(tresors_pos_col(k+add)) <= '0';
+					led_col_red(tresors_pos_col(k+add)) <= '0' ;
+				end if;	
+			end loop tresors_display;
+		
+			if(add = 0) then
+				add := 2;
+			else
+				add := 0;
+			end if;
+			
+			-- initialisation pour la suite du balayage
+			if (fast_counter = 6) then 
+				fast_counter <= 0 ; 
+			else 
+				fast_counter <= fast_counter + 1  ;
+	
+			end if;
+		end if; 	
+   end process DISPLAY;
+ 
+ 
+	MAIN: process(clock1)
+	
+	constant max_count : natural := 20;
+	variable count : natural range 0 to max_count := 0;
+	variable number_blink : integer range 0 to 5 := 0;
+	
+	begin
+		if(rising_edge(clock1)) then
+				
+			case state is
+				when INIT =>
+					color_blink_players <= (1, 2);
+					tresors_discover <= (false,false,false,false);
+					current_player <= 0;
+					pos_row_players <= (4, 1);
+					pos_col_players <= (1, 2);
+					counters <= (0,0);
 					
-					state <= PLAYER1;
-
-
-					when PLAYER1 =>
-						if() -- si plusieurs bouton sont pressés
-							state <= PLAYER1
-
-						if(buttons(0) = 1) then    -- if UP 
-							if(pos_row_1 >= 6)
-								state <= PLAYER1
-
-							else
-								if() then -- couleur assignée led (pos_row_1, pos_col_1 ) != 1 (!= couleur du joueur 1)
-									-- éteindre led position player 1
-								pos_row_1 <= pos_row_1 + 1
-								state <= MOVEMENT
-
-						if(buttons(1) = 1) then
-							if(pos_col_1 >= 4)
-								state <= PLAYER
-
-							else
-								if() then -- couleur assignée led (pos_row_1, pos_col_1 ) != 1 (!= couleur du joueur 1)
-								for i in 0 to 3
-									-- éteindre led position player 1
-								pos_col_1 <= pos_col_1 + 1
-								state <= MOVEMENT
-
-						-- ce sera la meme chose pour down 	and right -> comment faire un fonction qui prend des aruments?
-						 
+					-- il faudra ici donner les positions des trésors avec random generator
 					
-					when MOVEMENT =>
-						-- led (pos_row_1, pos_col_1 ) clignote 2fois de sa couleur assignée
-						-- led pos player_1 s'allume selon couleur player 1 constament 
+					state <= PLAYER_TURN;
 
-						if() then -- couleur assignée led = 1 (= couleur du joueur 1)
-							state <= INCREASE_PLAYER1
+				when PLAYER_TURN =>
+ 				
+					 if( buttons = "1111" ) then --No button pressed by the player
+						 new_user_command <= true;
+					
+					 elsif( new_user_command ) then --New signal send by the player
+						 new_user_command <= false;
+						
+						 if(false)then -- if(reset_button = '0')
+							state <= INIT;
+						 elsif (buttons(0) = '0') then --up
+							state <= MOVE_UP;
+						 elsif (buttons(1) = '0') then --right
+							state <= MOVE_RIGHT;
+						 elsif (buttons(2) = '0') then --down
+							state <= MOVE_DOWN;
+						 elsif (buttons(3) = '0') then --left
+							state <= MOVE_LEFT;
+							 
+						 else
+							state <= PLAYER_TURN;
+						 end if;
+					  else
+						state <= PLAYER_TURN;
+					end if;
+					
+				when MOVE_UP =>
+					if(pos_row_players(current_player) = 0) then
+								pos_row_players(current_player) <= 6;		
+					else
+						pos_row_players(current_player) <= pos_row_players(current_player) - 1;
+					end if;
+					state <= CHECK_TRESORS;
+				
+				when MOVE_RIGHT =>
+					if(pos_col_players(current_player) = 4) then
+								pos_col_players(current_player) <= 0;		
+					else
+						pos_col_players(current_player) <= pos_col_players(current_player) + 1;
+					end if;
+					state <= CHECK_TRESORS;
+				
+					
+				when MOVE_DOWN =>
+					if(pos_row_players(current_player) = 6) then
+								pos_row_players(current_player) <= 0;		
+					else
+						pos_row_players(current_player) <= pos_row_players(current_player) + 1;
+					end if;
+					state <= CHECK_TRESORS;
+				
+				
+				when MOVE_LEFT =>
+					if(pos_col_players(current_player) = 0) then
+								pos_col_players(current_player) <= 4;		
+					else
+						pos_col_players(current_player) <= pos_col_players(current_player) - 1;
+					end if;
+					state <= CHECK_TRESORS;
+					
+					
+				when CHECK_TRESORS =>
+					if((tresors_pos_row(0) = pos_row_players(current_player) and tresors_pos_col(0) = pos_col_players(current_player) ) or (tresors_pos_row(2) = pos_row_players(current_player) and tresors_pos_col(2) = pos_col_players(current_player))) then
+							case_color <= 0;
+							state <= BLINK_LED;
+								
+					elsif(tresors_pos_row(1) = pos_row_players(current_player) and tresors_pos_col(1) = pos_col_players(current_player) )or ( tresors_pos_row(3) = pos_row_players(current_player) and tresors_pos_col(3) = pos_col_players(current_player)) then
+							 case_color <= 1;
+							 state <= BLINK_LED;
+					else
+							current_player <= 1 - current_player; --A VERIFIER
+							state <= PLAYER_TURN;
+					end if;
+					
+				when BLINK_LED =>
+					
+					if (count < max_count/2 and number_blink < 4) then
+						if(case_color = 0) then
+							color_blink_players(current_player) <= 1;
 						else
-							state <= PLAYER1 -- à implémenter par la suite avec player2
-							
-
-					when INCREASE_PLAYER1 =>
-						counter_1 <= counter_1 + 1
+							color_blink_players(current_player) <= 2;
+						end if;
+						count := count + 1;
+						state <= BLINK_LED;
 						
-							if(tresor_pos(0))
-								treso_pos(0, 3) := "1"
-							
 						
-						end loop
-						if(counter1 = 2) then
-							state <= END_GAME
+					elsif (count < max_count and number_blink < 4) then
+						color_blink_players(current_player) <= 0;
+						count := count + 1;
+						state <= BLINK_LED;
+						
+					elsif(number_blink < 4) then
+						count := 0;
+						number_blink := number_blink + 1;
+						state <= BLINK_LED;
+					else
+						color_blink_players(current_player) <= current_player+1;
+						number_blink :=  0;
+						--retirer trésor du jeu si bon joueur
+						state <= REMOVE_TRESOR;
+						
+					end if;
 					
-					when END_GAME =>
-							-- faire clignoter toutes les led de la couleur du gagnant (jusqu'à ce que l'on reset) ou reset automatiquement apres 10 sec ?
-										
+			when REMOVE_TRESOR =>
+				if(tresors_pos_row(current_player) = pos_row_players(current_player) and tresors_pos_col(current_player) = pos_col_players(current_player)) then
+						tresors_discover(current_player) <= true;
+						state <= INCREASE_PLAYER;
+				elsif(tresors_pos_row(current_player +2) = pos_row_players(current_player) and tresors_pos_col(current_player +2) = pos_col_players(current_player)) then
+						tresors_discover(current_player +2) <= true;
+						state <= INCREASE_PLAYER;
+				else
+					current_player <= 1 - current_player;
+					state <= PLAYER_TURN;
+				end if;
+			
+			when INCREASE_PLAYER =>
+				counters(current_player) <= counters(current_player) + 1;
+				
+				-- MODIFIER VALEUR SEVEN SEGMENTS
+				
+				if(counters(current_player) = 2) then
+				  state <= END_GAME;
+				else
+					current_player <= 1 - current_player;
+					state <= PLAYER_TURN;
+				end if;
+			
+			When END_GAME =>
+				-- allumer quelques leds pour montrer la fin du jeu
+				
+				state <= INIT;
 
-	
-	reset: process(clock1)
-		begin
-			if(reset = 1) then
-				state <= INIT
-				// les compteurs et les pos sont bien remis à 0 ???
-	
+			end case; 
+		end if;
+	end process MAIN;
 	
 end architecture Behavioral;
-
-function <function_name> (
-        <parameter1_name> : <parameter1_type> := <default_value>;
-        <parameter2_name> : <parameter2_type> := <default_value>;
-                                    ... ) return <return_type> is
-    <constant_or_variable_declaration>
-begin
-    <code_performed_by_the_function>
-    return <value>
-end function;
-
