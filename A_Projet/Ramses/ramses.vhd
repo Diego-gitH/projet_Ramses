@@ -17,8 +17,6 @@ entity matrix_test is port(
    led_col_red : out std_logic_vector(4 downto 0);
    led_row : out std_logic_vector(6 downto 0);
 	led_current_player : out std_logic_vector(1 downto 0); -- 0 player_red
-	--first_7segment : out std_logic_vector(3 downto 0); 
-	--second_7segment : out std_logic_vector(3 downto 0);
 	seven_segments: out std_logic_vector(1 downto 0)
 	
 );
@@ -79,8 +77,6 @@ begin
 			led_current_player(current_player) <= '0'; -- A TESTER
 			--led_current_player(1-current_player) <= '1'; -- A FAIRE EN HARDWARE AVEC UN NOT
 			
-			-- AFFICHAGE SEGMENT DISPLAY
-			-- ......
 			
 			-- balayage lignes                                                                
 			led_row <= (others => '0') ;
@@ -226,7 +222,7 @@ begin
 					elsif(tresors_pos_row(case_color+2) = pos_row_players(current_player) and tresors_pos_col(case_color+2) = pos_col_players(current_player)) then
 							 state <= BLINK_LED;
 					else
-							current_player <= 1 - current_player; --A VERIFIER
+							current_player <= 1 - current_player; 
 							state <= PLAYER_TURN;
 					end if;
 					
@@ -263,9 +259,6 @@ begin
 					
 			
 			when INCREASE_PLAYER =>
-				
-				
-				-- MODIFIER VALEUR SEVEN SEGMENTS
 				
 				if(counters(current_player) = 1) then
 				  state <= END_GAME;
