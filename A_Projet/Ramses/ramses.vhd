@@ -42,8 +42,8 @@ architecture Behavioral of matrix_test is
 	signal counters : array_counter := (0,0);
 	
 	
-	signal pos_row_players : player_array_2_row := (4, 1);
-   signal pos_col_players : player_array_2_col := (1, 2);
+	signal pos_row_players : player_array_2_row := (6, 0);
+   signal pos_col_players : player_array_2_col := (0, 4);
 	
 	signal fast_counter : integer range 0 to 6; -- pour display la matrice
 	signal new_user_command : boolean := true;
@@ -277,8 +277,8 @@ begin
 				color_blink_players <= (1, 2);
 	
 				current_player <= 0;
-				pos_row_players <= (4, 1);
-				pos_col_players <= (1, 2);
+				pos_row_players <= (6, 0);
+				pos_col_players <= (0, 4);
 				counters <= (0,0);
 				state <= PLAYER_TURN;
 
