@@ -1,0 +1,11 @@
+vendor_name = ModelSim
+source_file = 1, C:/Users/juana/OneDrive/Desktop/Ramses_projet/projet_Ramses/A_Projet/Ramses/ramses.vhd
+source_file = 1, C:/Users/juana/OneDrive/Desktop/codes_digit/CODE_EXAMPLE.vhd
+source_file = 1, c:/users/juana/onedrive/desktop/quartus_instalado/quartus/libraries/vhdl/ieee/prmtvs_b.vhd
+source_file = 1, c:/users/juana/onedrive/desktop/quartus_instalado/quartus/libraries/vhdl/ieee/prmtvs_p.vhd
+source_file = 1, c:/users/juana/onedrive/desktop/quartus_instalado/quartus/libraries/vhdl/ieee/timing_b.vhd
+source_file = 1, c:/users/juana/onedrive/desktop/quartus_instalado/quartus/libraries/vhdl/ieee/timing_p.vhd
+source_file = 1, C:/Users/juana/OneDrive/Desktop/Ramses_projet/projet_Ramses/A_Projet/Ramses/db/ramses.cbx.xml
+design_name = ramses
+instance = comp, \led~I\, led, ramses, 1
+instance = comp, \led1~I\, led1, ramses, 1

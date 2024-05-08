@@ -1,5 +1,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
+<<<<<<< Updated upstream
 use ieee.numeric_std.all;
 
 entity ramses is port(
@@ -125,3 +126,18 @@ begin
     return <value>
 end function;
 
+=======
+entity ramses is
+    port (
+        led   : out std_logic;   -- LED de salida
+		  led1   : out std_logic
+    );
+end entity ramses;
+
+architecture Behavioral of ramses is
+begin
+    -- Asigna un valor constante de '1' (encendido) a la LED
+    led <= '1';
+	 led1 <= '1';
+end architecture Behavioral;
+>>>>>>> Stashed changes

@@ -1,0 +1,6 @@
+
+State Machine - |ramses|state
+Name state.TURN_PLAYER2 state.INIT state.TURN_PLAYER1 
+state.TURN_PLAYER1 0 0 0 
+state.INIT 0 1 1 
+state.TURN_PLAYER2 1 0 1 
