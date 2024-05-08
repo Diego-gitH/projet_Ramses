@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity matrix_test is port(  
+entity ramses is port(  
 
 	-- clocks
 	clock0 : in std_logic;
@@ -10,26 +10,24 @@ entity matrix_test is port(
 	
 	-- Inputs
 	buttons : in std_logic_vector(0 to 3); -- up, right, down, left
-	reset_button : in std_logic; --bouton reset
+	reset_button : in std_logic;
 
 	-- outputs
 	led_col_green : out std_logic_vector(4 downto 0);
-   led_col_red : out std_logic_vector(4 downto 0);
-   led_row : out std_logic_vector(6 downto 0);
+    led_col_red : out std_logic_vector(4 downto 0);
+    led_row : out std_logic_vector(6 downto 0);
 	led_current_player : out std_logic_vector(1 downto 0); -- 0 player_red
 	seven_segments: out std_logic_vector(1 downto 0)
 	
 );
-end entity matrix_test;
+end entity ramses;
 
-architecture Behavioral of matrix_test is
-	
+architecture Behavioral of ramses is
 	
 	-- def nouv types
 	type states is (PLAYER_TURN, BLINK_LED, CHECK_TRESORS, INCREASE_PLAYER, END_GAME, MOVE_UP,MOVE_RIGHT, MOVE_LEFT, MOVE_DOWN);
 	type pos_array_4_row is array (0 to 3) of integer range -1 to 6;  -- pour les rows
 	type pos_array_4_col is array (0 to 3) of integer range -1 to 4;   -- pour les col red/green
-	type pos_array_4_bool is array (0 to 3) of boolean;
 	type player_array_2 is array (0 to 1) of integer range 0 to 2;
 	type player_array_2_row is array (0 to 1) of integer range 0 to 6;
 	type player_array_2_col is array (0 to 1) of integer range 0 to 4;
@@ -41,9 +39,8 @@ architecture Behavioral of matrix_test is
 	signal tresors_pos_col : pos_array_4_col := (1, 1, 2, 2); --idem
 	signal counters : array_counter := (0,0);
 	
-	
 	signal pos_row_players : player_array_2_row := (6, 0);
-   signal pos_col_players : player_array_2_col := (0, 4);
+    signal pos_col_players : player_array_2_col := (0, 4);
 	
 	signal fast_counter : integer range 0 to 6; -- pour display la matrice
 	signal new_user_command : boolean := true;
@@ -52,13 +49,11 @@ architecture Behavioral of matrix_test is
 	signal current_player: integer range 0 to 1 := 0;
 	signal count : integer range 0 to 4 := 0;
 	signal number_blink : integer range 0 to 3;
-	
-	     
+	  
 begin
 
 	DISPLAY: process(clock0)
-	
-	
+
 	begin
 		if rising_edge(clock0) then 
 		
@@ -74,9 +69,8 @@ begin
 				seven_segments(1) <= '0';
 			end if;
 		
-			led_current_player(current_player) <= '0'; -- A TESTER
-			--led_current_player(1-current_player) <= '1'; -- A FAIRE EN HARDWARE AVEC UN NOT
-			
+			led_current_player(1-current_player) <= '1';
+			led_current_player(current_player) <= '0'; 
 			
 			-- balayage lignes                                                                
 			led_row <= (others => '0') ;
@@ -103,26 +97,6 @@ begin
 					led_col_red(pos_col_players(1 - current_player)) <= '0';
 				end if;
 			end if;
-		
-	    	
-			-- affichage des tresors découverts en 2 tours sinon trop long
-			--first_it <= true;
-			--tresors_display : for k in 0 to 1 loop
-				--if(fast_counter = tresors_pos_row(k+add) and tresors_discover(k+add) and (tresors_pos_col(k+add) /= pos_col_players(current_player) or tresors_pos_row(k+add) /= pos_row_players(current_player)) and (tresors_pos_col(k+add) /= pos_col_players(1-current_player) or tresors_pos_row(k+add) /= pos_row_players(1-current_player))) then
-					--if(first_it) then
-						--led_row(fast_counter) <= '1' ;
-						--first_it <= false;
-					--end if;
-					--led_col_green(tresors_pos_col(k+add)) <= '0';
-					--led_col_red(tresors_pos_col(k+add)) <= '0' ;
-				--end if;	
-			--end loop tresors_display;
-		
-			--if(add = 0) then
-				--add <= 2;
-			--else
-				--add <= 0;
-			--end if;
 			
 			-- initialisation pour la suite du balayage
 			if (fast_counter = 6) then 
@@ -136,19 +110,17 @@ begin
  
  
 	MAIN: process(clock1)
-	
-	
+		
 	begin
 		if(rising_edge(clock1)) then
 				
 			case state is
 
 				when PLAYER_TURN =>
- 				
-					 if( buttons = "1111" ) then --No button pressed by the player
+					 if( buttons = "1111" and reset_button = '1' ) then --No button pressed by the player
 						 new_user_command <= true;
 					
-					 elsif( new_user_command ) then --New signal send by the player
+					 elsif( new_user_command ) then --New signal sent by the player
 						 new_user_command <= false;
 						
 						 if(reset_button = '0') then -- if(reset_button = '0')
@@ -175,6 +147,7 @@ begin
 					end if;
 					state <= CHECK_TRESORS;
 				
+
 				when MOVE_RIGHT =>
 					if(pos_col_players(current_player) = 4) then
 								pos_col_players(current_player) <= 0;		
@@ -268,8 +241,6 @@ begin
 				end if;
 			
 			When END_GAME =>
-				-- allumer quelques leds pour montrer la fin du jeu
-				
 				tresors_pos_row <= (3, 6, 4 , 3);  -- rouge1, vert1, rouge2, vert2
 				tresors_pos_col <= (1, 1, 2, 2); --idem
 	

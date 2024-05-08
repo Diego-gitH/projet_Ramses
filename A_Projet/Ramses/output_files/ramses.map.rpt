@@ -1,0 +1,320 @@
+Analysis & Synthesis report for ramses
+Tue May 07 09:36:56 2024
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. State Machine - |ramses|state
+  9. Registers Removed During Synthesis
+ 10. General Register Statistics
+ 11. Inverted Register Statistics
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+
+
+
++---------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                              ;
++-----------------------------+---------------------------------------------+
+; Analysis & Synthesis Status ; Successful - Tue May 07 09:36:56 2024       ;
+; Quartus Prime Version       ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
+; Revision Name               ; ramses                                      ;
+; Top-level Entity Name       ; ramses                                      ;
+; Family                      ; MAX V                                       ;
+; Total logic elements        ; 160                                         ;
+; Total pins                  ; 28                                          ;
+; Total virtual pins          ; 0                                           ;
+; UFM blocks                  ; 0 / 1 ( 0 % )                               ;
++-----------------------------+---------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                           ; 5M160ZE64C5        ;                    ;
+; Top-level entity name                                            ; ramses             ; ramses             ;
+; Family name                                                      ; MAX V              ; Cyclone V          ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                     ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                               ;
++----------------------------------+-----------------+-----------------+-------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                                                        ; Library ;
++----------------------------------+-----------------+-----------------+-------------------------------------------------------------------------------------+---------+
+; ramses.vhd                       ; yes             ; User VHDL File  ; C:/a Université/digital electronics/projet/projet_Ramses/A_Projet/Ramses/ramses.vhd ;         ;
++----------------------------------+-----------------+-----------------+-------------------------------------------------------------------------------------+---------+
+
+
++--------------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary                  ;
++---------------------------------------------+----------------+
+; Resource                                    ; Usage          ;
++---------------------------------------------+----------------+
+; Total logic elements                        ; 160            ;
+;     -- Combinational with no register       ; 99             ;
+;     -- Register only                        ; 2              ;
+;     -- Combinational with a register        ; 59             ;
+;                                             ;                ;
+; Logic element usage by number of LUT inputs ;                ;
+;     -- 4 input functions                    ; 111            ;
+;     -- 3 input functions                    ; 40             ;
+;     -- 2 input functions                    ; 7              ;
+;     -- 1 input functions                    ; 0              ;
+;     -- 0 input functions                    ; 0              ;
+;                                             ;                ;
+; Logic elements by mode                      ;                ;
+;     -- normal mode                          ; 160            ;
+;     -- arithmetic mode                      ; 0              ;
+;     -- qfbk mode                            ; 0              ;
+;     -- register cascade mode                ; 0              ;
+;     -- synchronous clear/load mode          ; 2              ;
+;     -- asynchronous clear/load mode         ; 0              ;
+;                                             ;                ;
+; Total registers                             ; 61             ;
+; I/O pins                                    ; 28             ;
+; Maximum fan-out node                        ; current_player ;
+; Maximum fan-out                             ; 59             ;
+; Total fan-out                               ; 669            ;
+; Average fan-out                             ; 3.56           ;
++---------------------------------------------+----------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+-------------+--------------+
+; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name ; Entity Name ; Library Name ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+-------------+--------------+
+; |ramses                    ; 160 (160)   ; 61           ; 0          ; 28   ; 0            ; 99 (99)      ; 2 (2)             ; 59 (59)          ; 0 (0)           ; 0 (0)      ; |ramses             ; ramses      ; work         ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+-------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |ramses|state                                                                                                                                                                     ;
++-----------------------+-----------------+-----------------+------------------+---------------+----------------+-----------------------+---------------------+-----------------+-------------------+
+; Name                  ; state.MOVE_DOWN ; state.MOVE_LEFT ; state.MOVE_RIGHT ; state.MOVE_UP ; state.END_GAME ; state.INCREASE_PLAYER ; state.CHECK_TRESORS ; state.BLINK_LED ; state.PLAYER_TURN ;
++-----------------------+-----------------+-----------------+------------------+---------------+----------------+-----------------------+---------------------+-----------------+-------------------+
+; state.PLAYER_TURN     ; 0               ; 0               ; 0                ; 0             ; 0              ; 0                     ; 0                   ; 0               ; 0                 ;
+; state.BLINK_LED       ; 0               ; 0               ; 0                ; 0             ; 0              ; 0                     ; 0                   ; 1               ; 1                 ;
+; state.CHECK_TRESORS   ; 0               ; 0               ; 0                ; 0             ; 0              ; 0                     ; 1                   ; 0               ; 1                 ;
+; state.INCREASE_PLAYER ; 0               ; 0               ; 0                ; 0             ; 0              ; 1                     ; 0                   ; 0               ; 1                 ;
+; state.END_GAME        ; 0               ; 0               ; 0                ; 0             ; 1              ; 0                     ; 0                   ; 0               ; 1                 ;
+; state.MOVE_UP         ; 0               ; 0               ; 0                ; 1             ; 0              ; 0                     ; 0                   ; 0               ; 1                 ;
+; state.MOVE_RIGHT      ; 0               ; 0               ; 1                ; 0             ; 0              ; 0                     ; 0                   ; 0               ; 1                 ;
+; state.MOVE_LEFT       ; 0               ; 1               ; 0                ; 0             ; 0              ; 0                     ; 0                   ; 0               ; 1                 ;
+; state.MOVE_DOWN       ; 1               ; 0               ; 0                ; 0             ; 0              ; 0                     ; 0                   ; 0               ; 1                 ;
++-----------------------+-----------------+-----------------+------------------+---------------+----------------+-----------------------+---------------------+-----------------+-------------------+
+
+
++---------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                              ;
++----------------------------------------+----------------------------------------+
+; Register name                          ; Reason for Removal                     ;
++----------------------------------------+----------------------------------------+
+; led_current_player[0]~reg0             ; Stuck at GND due to stuck port data_in ;
+; led_current_player[1]~reg0             ; Stuck at GND due to stuck port data_in ;
+; tresors_pos_row[2][2]                  ; Merged with tresors_pos_col[2][1]      ;
+; tresors_pos_col[3][2]                  ; Merged with tresors_pos_col[3][0]      ;
+; tresors_pos_row[3][2]                  ; Merged with tresors_pos_col[3][0]      ;
+; tresors_pos_col[2][2]                  ; Merged with tresors_pos_col[2][0]      ;
+; tresors_pos_row[2][0]                  ; Merged with tresors_pos_col[2][0]      ;
+; tresors_pos_row[2][1]                  ; Merged with tresors_pos_col[2][0]      ;
+; tresors_pos_row[3][0]                  ; Merged with tresors_pos_col[3][1]      ;
+; tresors_pos_row[3][1]                  ; Merged with tresors_pos_col[3][1]      ;
+; tresors_pos_col[0][2]                  ; Merged with tresors_pos_col[0][1]      ;
+; tresors_pos_row[0][2]                  ; Merged with tresors_pos_col[0][1]      ;
+; tresors_pos_row[1][1]                  ; Merged with tresors_pos_col[1][0]      ;
+; tresors_pos_row[1][2]                  ; Merged with tresors_pos_col[1][0]      ;
+; tresors_pos_row[0][0]                  ; Merged with tresors_pos_col[0][0]      ;
+; tresors_pos_row[0][1]                  ; Merged with tresors_pos_col[0][0]      ;
+; tresors_pos_col[1][2]                  ; Merged with tresors_pos_col[1][1]      ;
+; tresors_pos_row[1][0]                  ; Merged with tresors_pos_col[1][1]      ;
+; counters[0][1]                         ; Stuck at GND due to stuck port data_in ;
+; counters[1][1]                         ; Stuck at GND due to stuck port data_in ;
+; tresors_pos_col[0][0]                  ; Stuck at VCC due to stuck port data_in ;
+; tresors_pos_col[1][0]                  ; Stuck at VCC due to stuck port data_in ;
+; tresors_pos_col[3][1]                  ; Stuck at VCC due to stuck port data_in ;
+; tresors_pos_col[2][1]                  ; Stuck at VCC due to stuck port data_in ;
+; Total Number of Removed Registers = 24 ;                                        ;
++----------------------------------------+----------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 61    ;
+; Number of registers using Synchronous Clear  ; 2     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 7     ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; pos_row_players[0][1]                  ; 2       ;
+; pos_row_players[0][2]                  ; 2       ;
+; pos_col_players[1][2]                  ; 6       ;
+; color_blink_players[1][1]              ; 4       ;
+; color_blink_players[0][0]              ; 4       ;
+; new_user_command                       ; 5       ;
+; Total number of inverted registers = 6 ;         ;
++----------------------------------------+---------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                              ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output    ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------+
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |ramses|pos_row_players[1][2] ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |ramses|pos_row_players[0][2] ;
+; 7:1                ; 2 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |ramses|state                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+    Info: Processing started: Tue May 07 09:36:43 2024
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ramses -c ramses
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (12021): Found 2 design units, including 1 entities, in source file ramses.vhd
+    Info (12022): Found design unit 1: ramses-Behavioral File: C:/a Université/digital electronics/projet/projet_Ramses/A_Projet/Ramses/ramses.vhd Line: 25
+    Info (12023): Found entity 1: ramses File: C:/a Université/digital electronics/projet/projet_Ramses/A_Projet/Ramses/ramses.vhd Line: 5
+Info (12127): Elaborating entity "ramses" for the top level hierarchy
+Warning (10027): Verilog HDL or VHDL warning at the ramses.vhd(184): index expression is not wide enough to address all of the elements in the array File: C:/a Université/digital electronics/projet/projet_Ramses/A_Projet/Ramses/ramses.vhd Line: 184
+Warning (10027): Verilog HDL or VHDL warning at the ramses.vhd(185): index expression is not wide enough to address all of the elements in the array File: C:/a Université/digital electronics/projet/projet_Ramses/A_Projet/Ramses/ramses.vhd Line: 185
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "led_current_player[0]" is stuck at GND File: C:/a Université/digital electronics/projet/projet_Ramses/A_Projet/Ramses/ramses.vhd Line: 59
+    Warning (13410): Pin "led_current_player[1]" is stuck at GND File: C:/a Université/digital electronics/projet/projet_Ramses/A_Projet/Ramses/ramses.vhd Line: 59
+Info (21057): Implemented 188 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 7 input pins
+    Info (21059): Implemented 21 output pins
+    Info (21061): Implemented 160 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 6 warnings
+    Info: Peak virtual memory: 4772 megabytes
+    Info: Processing ended: Tue May 07 09:36:56 2024
+    Info: Elapsed time: 00:00:13
+    Info: Total CPU time (on all processors): 00:00:08
+
+

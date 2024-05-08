@@ -1,0 +1,11 @@
+Fitter Status : Successful - Tue May 07 09:37:02 2024
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : ramses
+Top-level Entity Name : ramses
+Family : MAX V
+Device : 5M160ZE64C5
+Timing Models : Final
+Total logic elements : 160 / 160 ( 100 % )
+Total pins : 28 / 54 ( 52 % )
+Total virtual pins : 0
+UFM blocks : 0 / 1 ( 0 % )

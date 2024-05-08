@@ -1,0 +1,12 @@
+
+State Machine - |ramses|state
+Name state.MOVE_DOWN state.MOVE_LEFT state.MOVE_RIGHT state.MOVE_UP state.END_GAME state.INCREASE_PLAYER state.CHECK_TRESORS state.BLINK_LED state.PLAYER_TURN 
+state.PLAYER_TURN 0 0 0 0 0 0 0 0 0 
+state.BLINK_LED 0 0 0 0 0 0 0 1 1 
+state.CHECK_TRESORS 0 0 0 0 0 0 1 0 1 
+state.INCREASE_PLAYER 0 0 0 0 0 1 0 0 1 
+state.END_GAME 0 0 0 0 1 0 0 0 1 
+state.MOVE_UP 0 0 0 1 0 0 0 0 1 
+state.MOVE_RIGHT 0 0 1 0 0 0 0 0 1 
+state.MOVE_LEFT 0 1 0 0 0 0 0 0 1 
+state.MOVE_DOWN 1 0 0 0 0 0 0 0 1 

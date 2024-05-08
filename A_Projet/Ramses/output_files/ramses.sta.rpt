@@ -1,0 +1,770 @@
+Timing Analyzer report for ramses
+Tue May 07 09:37:06 2024
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Timing Analyzer Summary
+  3. Parallel Compilation
+  4. Clocks
+  5. Fmax Summary
+  6. Setup Summary
+  7. Hold Summary
+  8. Recovery Summary
+  9. Removal Summary
+ 10. Minimum Pulse Width Summary
+ 11. Setup: 'clock1'
+ 12. Setup: 'clock0'
+ 13. Hold: 'clock0'
+ 14. Hold: 'clock1'
+ 15. Setup Transfers
+ 16. Hold Transfers
+ 17. Report TCCS
+ 18. Report RSKM
+ 19. Unconstrained Paths Summary
+ 20. Clock Status Summary
+ 21. Unconstrained Input Ports
+ 22. Unconstrained Output Ports
+ 23. Unconstrained Input Ports
+ 24. Unconstrained Output Ports
+ 25. Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+
+
+
++-----------------------------------------------------------------------------+
+; Timing Analyzer Summary                                                     ;
++-----------------------+-----------------------------------------------------+
+; Quartus Prime Version ; Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
+; Timing Analyzer       ; Legacy Timing Analyzer                              ;
+; Revision Name         ; ramses                                              ;
+; Device Family         ; MAX V                                               ;
+; Device Name           ; 5M160ZE64C5                                         ;
+; Timing Models         ; Final                                               ;
+; Delay Model           ; Slow Model                                          ;
+; Rise/Fall Delays      ; Unavailable                                         ;
++-----------------------+-----------------------------------------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clocks                                                                                                                                                                             ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+------------+
+; Clock Name ; Type ; Period ; Frequency  ; Rise  ; Fall  ; Duty Cycle ; Divide by ; Multiply by ; Phase ; Offset ; Edge List ; Edge Shift ; Inverted ; Master ; Source ; Targets    ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+------------+
+; clock0     ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { clock0 } ;
+; clock1     ; Base ; 1.000  ; 1000.0 MHz ; 0.000 ; 0.500 ;            ;           ;             ;       ;        ;           ;            ;          ;        ;        ; { clock1 } ;
++------------+------+--------+------------+-------+-------+------------+-----------+-------------+-------+--------+-----------+------------+----------+--------+--------+------------+
+
+
++-------------------------------------------------+
+; Fmax Summary                                    ;
++-----------+-----------------+------------+------+
+; Fmax      ; Restricted Fmax ; Clock Name ; Note ;
++-----------+-----------------+------------+------+
+; 32.76 MHz ; 32.76 MHz       ; clock1     ;      ;
+; 54.15 MHz ; 54.15 MHz       ; clock0     ;      ;
++-----------+-----------------+------------+------+
+This panel reports FMAX for every clock in the design, regardless of the user-specified clock periods.  FMAX is only computed for paths where the source and destination registers or ports are driven by the same clock.  Paths of different clocks, including generated clocks, are ignored.  For paths between a clock and its inversion, FMAX is computed as if the rising and falling edges are scaled along with FMAX, such that the duty cycle (in terms of a percentage) is maintained. Altera recommends that you always use clock constraints and other slack reports for sign-off analysis.
+
+
++----------------------------------+
+; Setup Summary                    ;
++--------+---------+---------------+
+; Clock  ; Slack   ; End Point TNS ;
++--------+---------+---------------+
+; clock1 ; -29.529 ; -688.348      ;
+; clock0 ; -24.993 ; -405.589      ;
++--------+---------+---------------+
+
+
++--------------------------------+
+; Hold Summary                   ;
++--------+-------+---------------+
+; Clock  ; Slack ; End Point TNS ;
++--------+-------+---------------+
+; clock0 ; 3.156 ; 0.000         ;
+; clock1 ; 3.410 ; 0.000         ;
++--------+-------+---------------+
+
+
+--------------------
+; Recovery Summary ;
+--------------------
+No paths to report.
+
+
+-------------------
+; Removal Summary ;
+-------------------
+No paths to report.
+
+
++---------------------------------+
+; Minimum Pulse Width Summary     ;
++--------+--------+---------------+
+; Clock  ; Slack  ; End Point TNS ;
++--------+--------+---------------+
+; clock0 ; -2.289 ; -2.289        ;
+; clock1 ; -2.289 ; -2.289        ;
++--------+--------+---------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------+
+; Setup: 'clock1'                                                                                                               ;
++---------+-----------------------+-----------------------+--------------+-------------+--------------+------------+------------+
+; Slack   ; From Node             ; To Node               ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++---------+-----------------------+-----------------------+--------------+-------------+--------------+------------+------------+
+; -29.529 ; pos_row_players[0][2] ; state.BLINK_LED       ; clock1       ; clock1      ; 1.000        ; 0.000      ; 30.208     ;
+; -28.458 ; current_player        ; state.BLINK_LED       ; clock1       ; clock1      ; 1.000        ; 0.000      ; 29.137     ;
+; -28.285 ; pos_row_players[1][2] ; state.BLINK_LED       ; clock1       ; clock1      ; 1.000        ; 0.000      ; 28.964     ;
+; -25.870 ; tresors_pos_col[3][0] ; state.BLINK_LED       ; clock1       ; clock1      ; 1.000        ; 0.000      ; 26.549     ;
+; -25.684 ; current_player        ; state.PLAYER_TURN     ; clock1       ; clock1      ; 1.000        ; 0.000      ; 26.363     ;
+; -25.682 ; current_player        ; current_player        ; clock1       ; clock1      ; 1.000        ; 0.000      ; 26.361     ;
+; -25.401 ; pos_row_players[0][2] ; state.PLAYER_TURN     ; clock1       ; clock1      ; 1.000        ; 0.000      ; 26.080     ;
+; -25.399 ; pos_row_players[0][2] ; current_player        ; clock1       ; clock1      ; 1.000        ; 0.000      ; 26.078     ;
+; -25.123 ; tresors_pos_col[2][0] ; state.BLINK_LED       ; clock1       ; clock1      ; 1.000        ; 0.000      ; 25.802     ;
+; -25.064 ; pos_row_players[0][2] ; tresors_pos_col[2][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 25.743     ;
+; -25.058 ; case_color            ; state.BLINK_LED       ; clock1       ; clock1      ; 1.000        ; 0.000      ; 25.737     ;
+; -24.157 ; pos_row_players[1][2] ; state.PLAYER_TURN     ; clock1       ; clock1      ; 1.000        ; 0.000      ; 24.836     ;
+; -24.155 ; pos_row_players[1][2] ; current_player        ; clock1       ; clock1      ; 1.000        ; 0.000      ; 24.834     ;
+; -23.993 ; current_player        ; tresors_pos_col[2][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 24.672     ;
+; -23.981 ; pos_row_players[0][2] ; case_color            ; clock1       ; clock1      ; 1.000        ; 0.000      ; 24.660     ;
+; -23.820 ; pos_row_players[1][2] ; tresors_pos_col[2][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 24.499     ;
+; -23.621 ; current_player        ; pos_col_players[0][2] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 24.300     ;
+; -23.295 ; pos_col_players[0][1] ; state.BLINK_LED       ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.974     ;
+; -23.185 ; tresors_pos_col[1][1] ; state.BLINK_LED       ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.864     ;
+; -23.089 ; pos_row_players[1][1] ; state.BLINK_LED       ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.768     ;
+; -22.996 ; pos_row_players[0][2] ; pos_row_players[0][1] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.675     ;
+; -22.924 ; tresors_pos_col[0][1] ; state.BLINK_LED       ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.603     ;
+; -22.910 ; current_player        ; case_color            ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.589     ;
+; -22.763 ; pos_col_players[1][2] ; state.BLINK_LED       ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.442     ;
+; -22.737 ; pos_row_players[1][2] ; case_color            ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.416     ;
+; -22.703 ; pos_row_players[0][2] ; tresors_pos_col[3][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.382     ;
+; -22.673 ; pos_col_players[1][0] ; state.PLAYER_TURN     ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.352     ;
+; -22.671 ; pos_col_players[1][0] ; current_player        ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.350     ;
+; -22.655 ; pos_row_players[1][0] ; state.PLAYER_TURN     ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.334     ;
+; -22.653 ; pos_row_players[1][0] ; current_player        ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.332     ;
+; -22.484 ; pos_row_players[0][2] ; pos_row_players[1][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.163     ;
+; -22.478 ; pos_row_players[0][2] ; pos_row_players[0][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.157     ;
+; -22.440 ; pos_col_players[1][0] ; state.BLINK_LED       ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.119     ;
+; -22.394 ; current_player        ; pos_col_players[1][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.073     ;
+; -22.393 ; current_player        ; pos_col_players[0][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.072     ;
+; -22.366 ; pos_row_players[1][1] ; state.PLAYER_TURN     ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.045     ;
+; -22.364 ; pos_row_players[1][1] ; current_player        ; clock1       ; clock1      ; 1.000        ; 0.000      ; 23.043     ;
+; -22.244 ; pos_col_players[1][1] ; state.BLINK_LED       ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.923     ;
+; -22.097 ; pos_col_players[0][0] ; state.BLINK_LED       ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.776     ;
+; -22.029 ; pos_row_players[0][2] ; pos_row_players[0][2] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.708     ;
+; -21.941 ; pos_col_players[0][2] ; state.BLINK_LED       ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.620     ;
+; -21.925 ; current_player        ; pos_row_players[0][1] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.604     ;
+; -21.892 ; pos_row_players[0][1] ; state.BLINK_LED       ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.571     ;
+; -21.878 ; pos_row_players[0][0] ; state.BLINK_LED       ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.557     ;
+; -21.877 ; pos_row_players[1][0] ; tresors_pos_col[2][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.556     ;
+; -21.810 ; state.MOVE_RIGHT      ; pos_col_players[1][2] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.489     ;
+; -21.752 ; pos_row_players[1][2] ; pos_row_players[0][1] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.431     ;
+; -21.738 ; current_player        ; state.INCREASE_PLAYER ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.417     ;
+; -21.632 ; current_player        ; tresors_pos_col[3][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.311     ;
+; -21.588 ; pos_row_players[1][1] ; tresors_pos_col[2][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.267     ;
+; -21.549 ; pos_row_players[0][0] ; state.PLAYER_TURN     ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.228     ;
+; -21.547 ; pos_row_players[0][0] ; current_player        ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.226     ;
+; -21.459 ; pos_row_players[1][2] ; tresors_pos_col[3][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.138     ;
+; -21.440 ; pos_col_players[1][2] ; state.PLAYER_TURN     ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.119     ;
+; -21.438 ; pos_col_players[1][2] ; current_player        ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.117     ;
+; -21.413 ; current_player        ; pos_row_players[1][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.092     ;
+; -21.407 ; current_player        ; pos_row_players[0][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.086     ;
+; -21.374 ; pos_col_players[0][0] ; state.PLAYER_TURN     ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.053     ;
+; -21.372 ; pos_col_players[0][0] ; current_player        ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.051     ;
+; -21.343 ; pos_col_players[0][1] ; state.PLAYER_TURN     ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.022     ;
+; -21.341 ; pos_col_players[0][1] ; current_player        ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.020     ;
+; -21.326 ; pos_row_players[0][2] ; state.INCREASE_PLAYER ; clock1       ; clock1      ; 1.000        ; 0.000      ; 22.005     ;
+; -21.240 ; pos_row_players[1][2] ; pos_row_players[1][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.919     ;
+; -21.234 ; pos_row_players[1][2] ; pos_row_players[0][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.913     ;
+; -21.169 ; pos_row_players[0][1] ; state.PLAYER_TURN     ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.848     ;
+; -21.167 ; pos_row_players[0][1] ; current_player        ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.846     ;
+; -21.155 ; current_player        ; pos_col_players[0][1] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.834     ;
+; -21.086 ; tresors_pos_col[3][0] ; state.PLAYER_TURN     ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.765     ;
+; -21.084 ; tresors_pos_col[3][0] ; current_player        ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.763     ;
+; -21.034 ; pos_row_players[1][0] ; state.BLINK_LED       ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.713     ;
+; -21.006 ; pos_col_players[0][1] ; tresors_pos_col[2][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.685     ;
+; -20.996 ; pos_row_players[0][2] ; tresors_pos_col[0][1] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.675     ;
+; -20.993 ; pos_row_players[0][2] ; tresors_pos_col[1][1] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.672     ;
+; -20.958 ; current_player        ; pos_row_players[0][2] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.637     ;
+; -20.793 ; pos_row_players[1][0] ; case_color            ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.472     ;
+; -20.785 ; pos_row_players[1][2] ; pos_row_players[0][2] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.464     ;
+; -20.775 ; pos_col_players[1][0] ; tresors_pos_col[2][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.454     ;
+; -20.771 ; pos_row_players[0][0] ; tresors_pos_col[2][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.450     ;
+; -20.621 ; pos_row_players[1][1] ; pos_row_players[0][1] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.300     ;
+; -20.618 ; pos_col_players[0][2] ; state.PLAYER_TURN     ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.297     ;
+; -20.616 ; pos_col_players[0][2] ; current_player        ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.295     ;
+; -20.596 ; pos_col_players[0][0] ; tresors_pos_col[2][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.275     ;
+; -20.504 ; pos_row_players[1][1] ; case_color            ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.183     ;
+; -20.394 ; current_player        ; pos_col_players[1][2] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.073     ;
+; -20.391 ; pos_row_players[0][1] ; tresors_pos_col[2][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.070     ;
+; -20.339 ; tresors_pos_col[2][0] ; state.PLAYER_TURN     ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.018     ;
+; -20.337 ; tresors_pos_col[2][0] ; current_player        ; clock1       ; clock1      ; 1.000        ; 0.000      ; 21.016     ;
+; -20.292 ; pos_col_players[1][1] ; state.PLAYER_TURN     ; clock1       ; clock1      ; 1.000        ; 0.000      ; 20.971     ;
+; -20.290 ; pos_col_players[1][1] ; current_player        ; clock1       ; clock1      ; 1.000        ; 0.000      ; 20.969     ;
+; -20.274 ; case_color            ; state.PLAYER_TURN     ; clock1       ; clock1      ; 1.000        ; 0.000      ; 20.953     ;
+; -20.272 ; case_color            ; current_player        ; clock1       ; clock1      ; 1.000        ; 0.000      ; 20.951     ;
+; -20.124 ; pos_col_players[0][1] ; pos_col_players[0][2] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 20.803     ;
+; -20.082 ; pos_row_players[1][2] ; state.INCREASE_PLAYER ; clock1       ; clock1      ; 1.000        ; 0.000      ; 20.761     ;
+; -20.053 ; state.END_GAME        ; pos_col_players[1][2] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 20.732     ;
+; -19.955 ; pos_col_players[1][1] ; tresors_pos_col[2][0] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 20.634     ;
+; -19.925 ; current_player        ; tresors_pos_col[0][1] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 20.604     ;
+; -19.923 ; pos_col_players[0][1] ; case_color            ; clock1       ; clock1      ; 1.000        ; 0.000      ; 20.602     ;
+; -19.922 ; current_player        ; tresors_pos_col[1][1] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 20.601     ;
+; -19.830 ; state.MOVE_LEFT       ; pos_col_players[0][1] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 20.509     ;
+; -19.752 ; pos_row_players[1][2] ; tresors_pos_col[0][1] ; clock1       ; clock1      ; 1.000        ; 0.000      ; 20.431     ;
++---------+-----------------------+-----------------------+--------------+-------------+--------------+------------+------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------+
+; Setup: 'clock0'                                                                                                                   ;
++---------+---------------------------+-----------------------+--------------+-------------+--------------+------------+------------+
+; Slack   ; From Node                 ; To Node               ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++---------+---------------------------+-----------------------+--------------+-------------+--------------+------------+------------+
+; -24.993 ; current_player            ; led_col_green[0]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 25.672     ;
+; -24.158 ; current_player            ; led_col_red[0]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 24.837     ;
+; -23.786 ; current_player            ; led_col_green[4]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 24.465     ;
+; -23.176 ; current_player            ; led_col_red[2]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 23.855     ;
+; -23.123 ; pos_row_players[0][2]     ; led_col_red[0]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 23.802     ;
+; -22.966 ; current_player            ; led_col_red[3]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 23.645     ;
+; -22.964 ; current_player            ; led_col_red[1]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 23.643     ;
+; -22.742 ; pos_row_players[0][2]     ; led_col_green[4]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 23.421     ;
+; -22.585 ; current_player            ; led_col_green[3]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 23.264     ;
+; -22.537 ; current_player            ; led_col_green[1]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 23.216     ;
+; -22.269 ; current_player            ; led_col_red[4]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 22.948     ;
+; -22.141 ; pos_row_players[0][2]     ; led_col_red[2]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 22.820     ;
+; -21.931 ; pos_row_players[0][2]     ; led_col_red[3]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 22.610     ;
+; -21.929 ; pos_row_players[0][2]     ; led_col_red[1]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 22.608     ;
+; -21.879 ; pos_row_players[1][2]     ; led_col_red[0]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 22.558     ;
+; -21.671 ; pos_row_players[1][1]     ; led_col_red[0]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 22.350     ;
+; -21.541 ; pos_row_players[0][2]     ; led_col_green[3]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 22.220     ;
+; -21.498 ; pos_row_players[1][2]     ; led_col_green[4]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 22.177     ;
+; -21.493 ; pos_row_players[0][2]     ; led_col_green[1]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 22.172     ;
+; -21.290 ; pos_row_players[1][1]     ; led_col_green[4]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 21.969     ;
+; -21.234 ; pos_row_players[0][2]     ; led_col_red[4]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 21.913     ;
+; -21.231 ; pos_row_players[1][1]     ; led_col_red[1]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 21.910     ;
+; -21.201 ; pos_col_players[1][0]     ; led_col_red[4]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 21.880     ;
+; -21.049 ; pos_row_players[1][1]     ; led_col_green[2]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 21.728     ;
+; -21.048 ; pos_row_players[1][1]     ; led_col_green[1]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 21.727     ;
+; -21.010 ; current_player            ; led_col_green[2]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 21.689     ;
+; -21.008 ; pos_row_players[0][2]     ; led_col_green[0]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 21.687     ;
+; -20.897 ; pos_row_players[1][2]     ; led_col_red[2]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 21.576     ;
+; -20.795 ; pos_col_players[0][0]     ; led_col_red[4]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 21.474     ;
+; -20.749 ; pos_col_players[1][2]     ; led_col_green[0]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 21.428     ;
+; -20.689 ; pos_row_players[1][1]     ; led_col_red[2]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 21.368     ;
+; -20.687 ; pos_row_players[1][2]     ; led_col_red[3]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 21.366     ;
+; -20.685 ; pos_row_players[1][2]     ; led_col_red[1]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 21.364     ;
+; -20.611 ; pos_col_players[0][2]     ; led_col_red[4]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 21.290     ;
+; -20.578 ; pos_row_players[1][1]     ; led_col_green[3]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 21.257     ;
+; -20.479 ; pos_row_players[1][1]     ; led_col_red[3]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 21.158     ;
+; -20.474 ; pos_row_players[0][1]     ; led_col_red[0]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 21.153     ;
+; -20.297 ; pos_row_players[1][2]     ; led_col_green[3]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.976     ;
+; -20.249 ; pos_row_players[1][2]     ; led_col_green[1]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.928     ;
+; -20.222 ; pos_row_players[1][1]     ; led_col_red[4]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.901     ;
+; -20.221 ; pos_row_players[1][1]     ; led_col_green[0]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.900     ;
+; -20.129 ; pos_col_players[0][1]     ; led_col_red[4]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.808     ;
+; -20.093 ; pos_row_players[0][1]     ; led_col_green[4]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.772     ;
+; -19.990 ; pos_row_players[1][2]     ; led_col_red[4]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.669     ;
+; -19.979 ; pos_col_players[1][2]     ; led_col_red[4]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.658     ;
+; -19.966 ; pos_row_players[0][2]     ; led_col_green[2]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.645     ;
+; -19.927 ; pos_col_players[0][2]     ; led_col_green[0]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.606     ;
+; -19.815 ; pos_col_players[1][1]     ; led_col_red[4]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.494     ;
+; -19.813 ; pos_col_players[0][1]     ; led_col_green[0]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.492     ;
+; -19.764 ; pos_row_players[1][2]     ; led_col_green[0]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.443     ;
+; -19.492 ; pos_row_players[0][1]     ; led_col_red[2]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.171     ;
+; -19.441 ; pos_row_players[0][2]     ; led_row[0]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.120     ;
+; -19.440 ; pos_row_players[0][2]     ; led_row[5]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.119     ;
+; -19.439 ; pos_row_players[0][2]     ; led_row[3]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.118     ;
+; -19.436 ; pos_row_players[0][2]     ; led_row[4]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.115     ;
+; -19.430 ; pos_row_players[0][2]     ; led_row[1]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.109     ;
+; -19.430 ; pos_row_players[0][2]     ; led_row[2]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.109     ;
+; -19.429 ; pos_row_players[0][2]     ; led_row[6]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.108     ;
+; -19.421 ; pos_col_players[1][2]     ; led_col_green[4]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 20.100     ;
+; -19.282 ; pos_row_players[0][1]     ; led_col_red[3]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.961     ;
+; -19.280 ; pos_row_players[0][1]     ; led_col_red[1]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.959     ;
+; -19.161 ; pos_col_players[1][2]     ; led_col_red[0]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.840     ;
+; -19.096 ; color_blink_players[0][0] ; led_col_red[0]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.775     ;
+; -18.965 ; pos_row_players[1][0]     ; led_col_red[1]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.644     ;
+; -18.892 ; pos_row_players[0][1]     ; led_col_green[3]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.571     ;
+; -18.844 ; pos_row_players[0][1]     ; led_col_green[1]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.523     ;
+; -18.783 ; pos_row_players[1][0]     ; led_col_green[2]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.462     ;
+; -18.782 ; pos_row_players[1][0]     ; led_col_green[1]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.461     ;
+; -18.762 ; pos_col_players[1][1]     ; led_col_green[0]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.441     ;
+; -18.722 ; pos_row_players[1][2]     ; led_col_green[2]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.401     ;
+; -18.715 ; color_blink_players[0][0] ; led_col_green[4]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.394     ;
+; -18.623 ; pos_row_players[1][1]     ; led_row[0]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.302     ;
+; -18.622 ; pos_row_players[1][1]     ; led_row[5]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.301     ;
+; -18.621 ; pos_row_players[1][1]     ; led_row[3]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.300     ;
+; -18.618 ; pos_row_players[1][1]     ; led_row[4]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.297     ;
+; -18.612 ; pos_row_players[1][1]     ; led_row[1]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.291     ;
+; -18.612 ; pos_row_players[1][1]     ; led_row[2]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.291     ;
+; -18.611 ; pos_row_players[1][1]     ; led_row[6]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.290     ;
+; -18.604 ; pos_col_players[1][0]     ; led_col_green[4]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.283     ;
+; -18.599 ; pos_col_players[0][2]     ; led_col_green[4]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.278     ;
+; -18.585 ; pos_row_players[0][1]     ; led_col_red[4]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.264     ;
+; -18.526 ; color_blink_players[1][1] ; led_col_red[0]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.205     ;
+; -18.486 ; pos_col_players[0][1]     ; led_col_green[4]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.165     ;
+; -18.370 ; current_player            ; led_row[0]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.049     ;
+; -18.369 ; current_player            ; led_row[5]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.048     ;
+; -18.368 ; current_player            ; led_row[3]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.047     ;
+; -18.365 ; current_player            ; led_row[4]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.044     ;
+; -18.359 ; pos_row_players[0][1]     ; led_col_green[0]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.038     ;
+; -18.359 ; current_player            ; led_row[1]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.038     ;
+; -18.359 ; current_player            ; led_row[2]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.038     ;
+; -18.358 ; current_player            ; led_row[6]~reg0       ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.037     ;
+; -18.339 ; pos_col_players[0][2]     ; led_col_red[0]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.018     ;
+; -18.331 ; pos_row_players[0][0]     ; led_col_red[1]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 19.010     ;
+; -18.312 ; pos_row_players[1][0]     ; led_col_green[3]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 18.991     ;
+; -18.254 ; color_blink_players[1][0] ; led_col_red[0]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 18.933     ;
+; -18.251 ; pos_row_players[1][0]     ; led_col_red[2]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 18.930     ;
+; -18.225 ; pos_col_players[0][1]     ; led_col_red[0]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 18.904     ;
+; -18.205 ; pos_col_players[1][2]     ; led_col_red[3]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 18.884     ;
+; -18.203 ; pos_col_players[1][2]     ; led_col_red[1]~reg0   ; clock1       ; clock0      ; 1.000        ; 0.000      ; 18.882     ;
+; -18.198 ; pos_col_players[0][0]     ; led_col_green[4]~reg0 ; clock1       ; clock0      ; 1.000        ; 0.000      ; 18.877     ;
++---------+---------------------------+-----------------------+--------------+-------------+--------------+------------+------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------+
+; Hold: 'clock0'                                                                                                                ;
++--------+-----------------------+------------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node             ; To Node                ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+-----------------------+------------------------+--------------+-------------+--------------+------------+------------+
+; 3.156  ; counters[0][0]        ; seven_segments[0]~reg0 ; clock1       ; clock0      ; 0.000        ; 0.000      ; 3.195      ;
+; 3.396  ; counters[1][0]        ; seven_segments[1]~reg0 ; clock1       ; clock0      ; 0.000        ; 0.000      ; 3.435      ;
+; 3.453  ; fast_counter[0]       ; fast_counter[0]        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 3.492      ;
+; 6.421  ; fast_counter[2]       ; fast_counter[2]        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 6.460      ;
+; 6.426  ; fast_counter[2]       ; fast_counter[1]        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 6.465      ;
+; 6.493  ; fast_counter[0]       ; fast_counter[2]        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 6.532      ;
+; 6.499  ; fast_counter[0]       ; fast_counter[1]        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 6.538      ;
+; 6.701  ; fast_counter[0]       ; led_row[4]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 6.740      ;
+; 6.701  ; fast_counter[0]       ; led_row[5]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 6.740      ;
+; 6.702  ; fast_counter[0]       ; led_row[0]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 6.741      ;
+; 6.708  ; fast_counter[0]       ; led_row[1]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 6.747      ;
+; 7.582  ; fast_counter[2]       ; led_row[3]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 7.621      ;
+; 7.583  ; fast_counter[2]       ; led_row[0]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 7.622      ;
+; 7.583  ; fast_counter[2]       ; led_row[4]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 7.622      ;
+; 7.583  ; fast_counter[2]       ; led_row[5]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 7.622      ;
+; 7.590  ; fast_counter[2]       ; led_row[6]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 7.629      ;
+; 7.591  ; fast_counter[2]       ; led_row[1]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 7.630      ;
+; 7.591  ; fast_counter[2]       ; led_row[2]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 7.630      ;
+; 8.755  ; fast_counter[0]       ; led_row[3]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 8.794      ;
+; 8.763  ; fast_counter[0]       ; led_row[6]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 8.802      ;
+; 8.764  ; fast_counter[0]       ; led_row[2]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 8.803      ;
+; 8.777  ; fast_counter[2]       ; fast_counter[0]        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 8.816      ;
+; 9.107  ; current_player        ; led_col_green[4]~reg0  ; clock1       ; clock0      ; 0.000        ; 0.000      ; 9.146      ;
+; 9.764  ; current_player        ; led_col_red[0]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 9.803      ;
+; 10.378 ; fast_counter[0]       ; led_col_green[4]~reg0  ; clock0       ; clock0      ; 0.000        ; 0.000      ; 10.417     ;
+; 10.686 ; fast_counter[1]       ; fast_counter[1]        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 10.725     ;
+; 10.693 ; fast_counter[1]       ; fast_counter[2]        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 10.732     ;
+; 10.887 ; pos_row_players[0][1] ; led_col_green[4]~reg0  ; clock1       ; clock0      ; 0.000        ; 0.000      ; 10.926     ;
+; 11.052 ; pos_col_players[0][2] ; led_col_red[0]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 11.091     ;
+; 11.368 ; fast_counter[0]       ; led_col_red[3]~reg0    ; clock0       ; clock0      ; 0.000        ; 0.000      ; 11.407     ;
+; 11.407 ; current_player        ; led_col_red[2]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 11.446     ;
+; 11.627 ; fast_counter[0]       ; led_col_red[0]~reg0    ; clock0       ; clock0      ; 0.000        ; 0.000      ; 11.666     ;
+; 11.873 ; pos_row_players[0][1] ; led_row[6]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 11.912     ;
+; 11.874 ; pos_row_players[0][1] ; led_row[1]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 11.913     ;
+; 11.874 ; pos_row_players[0][1] ; led_row[2]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 11.913     ;
+; 11.877 ; pos_row_players[0][1] ; led_col_red[3]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 11.916     ;
+; 11.880 ; pos_row_players[0][1] ; led_row[4]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 11.919     ;
+; 11.883 ; pos_row_players[0][1] ; led_row[3]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 11.922     ;
+; 11.884 ; pos_row_players[0][1] ; led_row[5]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 11.923     ;
+; 11.885 ; pos_row_players[0][1] ; led_row[0]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 11.924     ;
+; 12.136 ; pos_row_players[0][1] ; led_col_red[0]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 12.175     ;
+; 12.308 ; fast_counter[1]       ; led_row[1]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 12.347     ;
+; 12.321 ; fast_counter[1]       ; led_row[4]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 12.360     ;
+; 12.324 ; fast_counter[1]       ; led_row[5]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 12.363     ;
+; 12.325 ; fast_counter[1]       ; led_row[0]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 12.364     ;
+; 12.495 ; current_player        ; led_col_red[4]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 12.534     ;
+; 12.695 ; pos_col_players[0][2] ; led_col_red[2]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 12.734     ;
+; 12.918 ; current_player        ; led_col_green[3]~reg0  ; clock1       ; clock0      ; 0.000        ; 0.000      ; 12.957     ;
+; 12.922 ; fast_counter[1]       ; led_col_green[4]~reg0  ; clock0       ; clock0      ; 0.000        ; 0.000      ; 12.961     ;
+; 12.941 ; current_player        ; led_col_red[3]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 12.980     ;
+; 12.974 ; fast_counter[0]       ; led_col_green[0]~reg0  ; clock0       ; clock0      ; 0.000        ; 0.000      ; 13.013     ;
+; 12.975 ; fast_counter[0]       ; led_col_red[4]~reg0    ; clock0       ; clock0      ; 0.000        ; 0.000      ; 13.014     ;
+; 13.019 ; pos_col_players[1][1] ; led_col_red[0]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.058     ;
+; 13.041 ; pos_col_players[1][1] ; led_col_red[2]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.080     ;
+; 13.042 ; pos_col_players[1][1] ; led_col_green[3]~reg0  ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.081     ;
+; 13.270 ; fast_counter[0]       ; led_col_red[2]~reg0    ; clock0       ; clock0      ; 0.000        ; 0.000      ; 13.309     ;
+; 13.297 ; fast_counter[2]       ; led_col_green[2]~reg0  ; clock0       ; clock0      ; 0.000        ; 0.000      ; 13.336     ;
+; 13.314 ; pos_col_players[1][2] ; led_col_red[3]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.353     ;
+; 13.331 ; fast_counter[0]       ; led_col_green[3]~reg0  ; clock0       ; clock0      ; 0.000        ; 0.000      ; 13.370     ;
+; 13.355 ; pos_col_players[0][1] ; led_col_red[2]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.394     ;
+; 13.356 ; pos_col_players[0][1] ; led_col_green[3]~reg0  ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.395     ;
+; 13.415 ; pos_col_players[1][2] ; led_col_green[0]~reg0  ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.454     ;
+; 13.483 ; pos_row_players[0][1] ; led_col_green[0]~reg0  ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.522     ;
+; 13.484 ; pos_row_players[0][1] ; led_col_red[4]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.523     ;
+; 13.503 ; pos_row_players[1][0] ; led_row[6]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.542     ;
+; 13.504 ; pos_row_players[1][0] ; led_row[1]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.543     ;
+; 13.504 ; pos_row_players[1][0] ; led_row[2]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.543     ;
+; 13.510 ; pos_row_players[1][0] ; led_row[4]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.549     ;
+; 13.513 ; pos_row_players[1][0] ; led_row[3]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.552     ;
+; 13.514 ; pos_row_players[1][0] ; led_row[5]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.553     ;
+; 13.515 ; pos_row_players[1][0] ; led_row[0]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.554     ;
+; 13.539 ; pos_col_players[0][0] ; led_col_green[3]~reg0  ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.578     ;
+; 13.542 ; pos_col_players[0][0] ; led_col_red[2]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.581     ;
+; 13.754 ; pos_col_players[1][1] ; led_col_red[1]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.793     ;
+; 13.761 ; pos_col_players[1][1] ; led_col_red[3]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.800     ;
+; 13.772 ; pos_col_players[1][2] ; led_col_green[3]~reg0  ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.811     ;
+; 13.779 ; pos_row_players[0][1] ; led_col_red[2]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.818     ;
+; 13.801 ; fast_counter[0]       ; led_col_green[1]~reg0  ; clock0       ; clock0      ; 0.000        ; 0.000      ; 13.840     ;
+; 13.802 ; fast_counter[0]       ; led_col_green[2]~reg0  ; clock0       ; clock0      ; 0.000        ; 0.000      ; 13.841     ;
+; 13.816 ; fast_counter[1]       ; led_row[6]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 13.855     ;
+; 13.817 ; fast_counter[1]       ; led_row[2]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 13.856     ;
+; 13.826 ; fast_counter[1]       ; led_row[3]~reg0        ; clock0       ; clock0      ; 0.000        ; 0.000      ; 13.865     ;
+; 13.840 ; pos_row_players[0][1] ; led_col_green[3]~reg0  ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.879     ;
+; 13.845 ; pos_col_players[0][0] ; led_col_red[4]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.884     ;
+; 13.912 ; fast_counter[1]       ; led_col_red[3]~reg0    ; clock0       ; clock0      ; 0.000        ; 0.000      ; 13.951     ;
+; 13.945 ; pos_col_players[1][0] ; led_col_green[3]~reg0  ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.984     ;
+; 13.946 ; pos_col_players[0][2] ; led_col_red[3]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.985     ;
+; 13.948 ; pos_col_players[1][0] ; led_col_red[2]~reg0    ; clock1       ; clock0      ; 0.000        ; 0.000      ; 13.987     ;
+; 13.984 ; fast_counter[0]       ; led_col_red[1]~reg0    ; clock0       ; clock0      ; 0.000        ; 0.000      ; 14.023     ;
+; 14.135 ; current_player        ; led_row[6]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 14.174     ;
+; 14.136 ; current_player        ; led_row[1]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 14.175     ;
+; 14.136 ; current_player        ; led_row[2]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 14.175     ;
+; 14.142 ; current_player        ; led_row[4]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 14.181     ;
+; 14.145 ; current_player        ; led_row[3]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 14.184     ;
+; 14.146 ; current_player        ; led_row[5]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 14.185     ;
+; 14.147 ; current_player        ; led_row[0]~reg0        ; clock1       ; clock0      ; 0.000        ; 0.000      ; 14.186     ;
+; 14.171 ; fast_counter[1]       ; led_col_red[0]~reg0    ; clock0       ; clock0      ; 0.000        ; 0.000      ; 14.210     ;
+; 14.220 ; pos_col_players[1][1] ; led_col_green[2]~reg0  ; clock1       ; clock0      ; 0.000        ; 0.000      ; 14.259     ;
+; 14.242 ; pos_col_players[1][2] ; led_col_green[1]~reg0  ; clock1       ; clock0      ; 0.000        ; 0.000      ; 14.281     ;
+; 14.243 ; pos_col_players[1][2] ; led_col_green[2]~reg0  ; clock1       ; clock0      ; 0.000        ; 0.000      ; 14.282     ;
++--------+-----------------------+------------------------+--------------+-------------+--------------+------------+------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------+
+; Hold: 'clock1'                                                                                                                       ;
++--------+---------------------------+---------------------------+--------------+-------------+--------------+------------+------------+
+; Slack  ; From Node                 ; To Node                   ; Launch Clock ; Latch Clock ; Relationship ; Clock Skew ; Data Delay ;
++--------+---------------------------+---------------------------+--------------+-------------+--------------+------------+------------+
+; 3.410  ; state.MOVE_UP             ; state.CHECK_TRESORS       ; clock1       ; clock1      ; 0.000        ; 0.000      ; 3.449      ;
+; 3.541  ; count[0]                  ; count[0]                  ; clock1       ; clock1      ; 0.000        ; 0.000      ; 3.580      ;
+; 3.779  ; state.MOVE_LEFT           ; state.CHECK_TRESORS       ; clock1       ; clock1      ; 0.000        ; 0.000      ; 3.818      ;
+; 3.903  ; count[1]                  ; count[1]                  ; clock1       ; clock1      ; 0.000        ; 0.000      ; 3.942      ;
+; 3.907  ; count[1]                  ; count[2]                  ; clock1       ; clock1      ; 0.000        ; 0.000      ; 3.946      ;
+; 3.922  ; number_blink[0]           ; number_blink[0]           ; clock1       ; clock1      ; 0.000        ; 0.000      ; 3.961      ;
+; 3.932  ; number_blink[0]           ; count[0]                  ; clock1       ; clock1      ; 0.000        ; 0.000      ; 3.971      ;
+; 3.940  ; number_blink[0]           ; number_blink[1]           ; clock1       ; clock1      ; 0.000        ; 0.000      ; 3.979      ;
+; 4.989  ; state.END_GAME            ; color_blink_players[1][1] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.028      ;
+; 5.214  ; pos_col_players[1][1]     ; pos_col_players[1][1]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.253      ;
+; 5.261  ; state.MOVE_DOWN           ; state.CHECK_TRESORS       ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.300      ;
+; 5.267  ; pos_row_players[0][0]     ; pos_row_players[0][0]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.306      ;
+; 5.280  ; color_blink_players[0][0] ; color_blink_players[0][0] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.319      ;
+; 5.314  ; color_blink_players[1][1] ; color_blink_players[1][1] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.353      ;
+; 5.314  ; tresors_pos_col[0][1]     ; tresors_pos_col[0][1]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.353      ;
+; 5.366  ; count[2]                  ; count[2]                  ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.405      ;
+; 5.372  ; count[2]                  ; count[1]                  ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.411      ;
+; 5.421  ; state.MOVE_RIGHT          ; state.CHECK_TRESORS       ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.460      ;
+; 5.464  ; current_player            ; current_player            ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.503      ;
+; 5.465  ; pos_col_players[0][2]     ; pos_col_players[0][2]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.504      ;
+; 5.466  ; pos_row_players[1][0]     ; pos_row_players[1][0]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.505      ;
+; 5.467  ; tresors_pos_col[3][0]     ; tresors_pos_col[3][0]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.506      ;
+; 5.475  ; pos_col_players[1][0]     ; pos_col_players[1][0]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.514      ;
+; 5.492  ; state.END_GAME            ; color_blink_players[0][0] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.531      ;
+; 5.500  ; pos_col_players[0][1]     ; pos_col_players[0][1]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.539      ;
+; 5.519  ; tresors_pos_col[2][0]     ; tresors_pos_col[2][0]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.558      ;
+; 5.622  ; count[0]                  ; count[1]                  ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.661      ;
+; 5.623  ; number_blink[1]           ; number_blink[1]           ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.662      ;
+; 5.625  ; count[0]                  ; count[2]                  ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.664      ;
+; 5.632  ; number_blink[1]           ; count[0]                  ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.671      ;
+; 5.637  ; number_blink[1]           ; number_blink[0]           ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.676      ;
+; 5.902  ; color_blink_players[0][1] ; color_blink_players[0][1] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 5.941      ;
+; 6.045  ; number_blink[1]           ; count[1]                  ; clock1       ; clock1      ; 0.000        ; 0.000      ; 6.084      ;
+; 6.048  ; number_blink[1]           ; count[2]                  ; clock1       ; clock1      ; 0.000        ; 0.000      ; 6.087      ;
+; 6.049  ; count[0]                  ; number_blink[1]           ; clock1       ; clock1      ; 0.000        ; 0.000      ; 6.088      ;
+; 6.057  ; count[0]                  ; number_blink[0]           ; clock1       ; clock1      ; 0.000        ; 0.000      ; 6.096      ;
+; 6.070  ; state.END_GAME            ; color_blink_players[0][1] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 6.109      ;
+; 6.458  ; color_blink_players[1][0] ; color_blink_players[1][0] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 6.497      ;
+; 6.607  ; tresors_pos_col[1][1]     ; tresors_pos_col[1][1]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 6.646      ;
+; 6.609  ; case_color                ; color_blink_players[0][1] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 6.648      ;
+; 6.663  ; count[1]                  ; number_blink[1]           ; clock1       ; clock1      ; 0.000        ; 0.000      ; 6.702      ;
+; 6.671  ; count[1]                  ; number_blink[0]           ; clock1       ; clock1      ; 0.000        ; 0.000      ; 6.710      ;
+; 6.681  ; number_blink[0]           ; count[1]                  ; clock1       ; clock1      ; 0.000        ; 0.000      ; 6.720      ;
+; 6.684  ; number_blink[0]           ; count[2]                  ; clock1       ; clock1      ; 0.000        ; 0.000      ; 6.723      ;
+; 6.746  ; state.BLINK_LED           ; color_blink_players[0][0] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 6.785      ;
+; 6.762  ; current_player            ; pos_row_players[0][0]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 6.801      ;
+; 7.217  ; new_user_command          ; state.MOVE_UP             ; clock1       ; clock1      ; 0.000        ; 0.000      ; 7.256      ;
+; 7.486  ; count[2]                  ; number_blink[1]           ; clock1       ; clock1      ; 0.000        ; 0.000      ; 7.525      ;
+; 7.494  ; count[2]                  ; number_blink[0]           ; clock1       ; clock1      ; 0.000        ; 0.000      ; 7.533      ;
+; 7.518  ; state.PLAYER_TURN         ; new_user_command          ; clock1       ; clock1      ; 0.000        ; 0.000      ; 7.557      ;
+; 7.536  ; state.END_GAME            ; color_blink_players[1][0] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 7.575      ;
+; 8.282  ; state.BLINK_LED           ; color_blink_players[1][1] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 8.321      ;
+; 8.367  ; case_color                ; case_color                ; clock1       ; clock1      ; 0.000        ; 0.000      ; 8.406      ;
+; 8.392  ; state.CHECK_TRESORS       ; current_player            ; clock1       ; clock1      ; 0.000        ; 0.000      ; 8.431      ;
+; 8.469  ; current_player            ; pos_col_players[0][0]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 8.508      ;
+; 8.542  ; count[1]                  ; count[0]                  ; clock1       ; clock1      ; 0.000        ; 0.000      ; 8.581      ;
+; 8.700  ; counters[1][0]            ; counters[1][0]            ; clock1       ; clock1      ; 0.000        ; 0.000      ; 8.739      ;
+; 8.717  ; counters[0][0]            ; counters[0][0]            ; clock1       ; clock1      ; 0.000        ; 0.000      ; 8.756      ;
+; 8.733  ; state.END_GAME            ; new_user_command          ; clock1       ; clock1      ; 0.000        ; 0.000      ; 8.772      ;
+; 8.737  ; state.BLINK_LED           ; color_blink_players[0][1] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 8.776      ;
+; 8.796  ; current_player            ; pos_row_players[1][0]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 8.835      ;
+; 8.859  ; state.CHECK_TRESORS       ; case_color                ; clock1       ; clock1      ; 0.000        ; 0.000      ; 8.898      ;
+; 8.890  ; current_player            ; pos_col_players[1][1]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 8.929      ;
+; 8.892  ; current_player            ; pos_col_players[0][1]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 8.931      ;
+; 8.912  ; case_color                ; color_blink_players[1][0] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 8.951      ;
+; 8.933  ; new_user_command          ; new_user_command          ; clock1       ; clock1      ; 0.000        ; 0.000      ; 8.972      ;
+; 8.968  ; pos_col_players[1][0]     ; pos_col_players[1][1]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.007      ;
+; 9.117  ; current_player            ; counters[0][0]            ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.156      ;
+; 9.121  ; current_player            ; counters[1][0]            ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.160      ;
+; 9.134  ; current_player            ; color_blink_players[0][1] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.173      ;
+; 9.156  ; state.INCREASE_PLAYER     ; counters[0][0]            ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.195      ;
+; 9.158  ; state.INCREASE_PLAYER     ; counters[1][0]            ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.197      ;
+; 9.201  ; current_player            ; color_blink_players[1][0] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.240      ;
+; 9.246  ; current_player            ; tresors_pos_col[1][1]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.285      ;
+; 9.302  ; pos_col_players[1][2]     ; pos_col_players[1][2]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.341      ;
+; 9.322  ; current_player            ; tresors_pos_col[0][1]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.361      ;
+; 9.365  ; count[2]                  ; count[0]                  ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.404      ;
+; 9.405  ; state.END_GAME            ; pos_row_players[0][1]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.444      ;
+; 9.407  ; state.END_GAME            ; pos_row_players[0][2]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.446      ;
+; 9.531  ; state.CHECK_TRESORS       ; tresors_pos_col[1][1]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.570      ;
+; 9.534  ; state.CHECK_TRESORS       ; tresors_pos_col[0][1]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.573      ;
+; 9.642  ; current_player            ; color_blink_players[0][0] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.681      ;
+; 9.735  ; number_blink[0]           ; color_blink_players[0][1] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.774      ;
+; 9.814  ; pos_row_players[1][0]     ; pos_row_players[1][2]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.853      ;
+; 9.817  ; pos_row_players[1][0]     ; pos_row_players[1][1]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.856      ;
+; 9.846  ; counters[0][0]            ; state.END_GAME            ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.885      ;
+; 9.916  ; count[0]                  ; color_blink_players[0][1] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.955      ;
+; 9.923  ; number_blink[0]           ; color_blink_players[1][0] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.962      ;
+; 9.935  ; state.END_GAME            ; tresors_pos_col[3][0]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.974      ;
+; 9.939  ; state.END_GAME            ; tresors_pos_col[2][0]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 9.978      ;
+; 10.104 ; count[0]                  ; color_blink_players[1][0] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 10.143     ;
+; 10.201 ; case_color                ; color_blink_players[0][0] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 10.240     ;
+; 10.208 ; state.PLAYER_TURN         ; state.MOVE_RIGHT          ; clock1       ; clock1      ; 0.000        ; 0.000      ; 10.247     ;
+; 10.210 ; state.PLAYER_TURN         ; state.MOVE_DOWN           ; clock1       ; clock1      ; 0.000        ; 0.000      ; 10.249     ;
+; 10.212 ; state.PLAYER_TURN         ; state.MOVE_LEFT           ; clock1       ; clock1      ; 0.000        ; 0.000      ; 10.251     ;
+; 10.236 ; state.BLINK_LED           ; color_blink_players[1][0] ; clock1       ; clock1      ; 0.000        ; 0.000      ; 10.275     ;
+; 10.294 ; pos_col_players[0][2]     ; pos_col_players[1][2]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 10.333     ;
+; 10.342 ; state.CHECK_TRESORS       ; tresors_pos_col[3][0]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 10.381     ;
+; 10.346 ; state.CHECK_TRESORS       ; tresors_pos_col[2][0]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 10.385     ;
+; 10.353 ; state.END_GAME            ; pos_row_players[1][1]     ; clock1       ; clock1      ; 0.000        ; 0.000      ; 10.392     ;
++--------+---------------------------+---------------------------+--------------+-------------+--------------+------------+------------+
+
+
++-------------------------------------------------------------------+
+; Setup Transfers                                                   ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; clock0     ; clock0   ; 132      ; 0        ; 0        ; 0        ;
+; clock1     ; clock0   ; 546      ; 0        ; 0        ; 0        ;
+; clock1     ; clock1   ; 1003     ; 0        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
++-------------------------------------------------------------------+
+; Hold Transfers                                                    ;
++------------+----------+----------+----------+----------+----------+
+; From Clock ; To Clock ; RR Paths ; FR Paths ; RF Paths ; FF Paths ;
++------------+----------+----------+----------+----------+----------+
+; clock0     ; clock0   ; 132      ; 0        ; 0        ; 0        ;
+; clock1     ; clock0   ; 546      ; 0        ; 0        ; 0        ;
+; clock1     ; clock1   ; 1003     ; 0        ; 0        ; 0        ;
++------------+----------+----------+----------+----------+----------+
+Entries labeled "false path" only account for clock-to-clock false paths and not path-based false paths. As a result, actual path counts may be lower than reported.
+
+
+---------------
+; Report TCCS ;
+---------------
+No dedicated SERDES Transmitter circuitry present in device or used in design
+
+
+---------------
+; Report RSKM ;
+---------------
+No non-DPA dedicated SERDES Receiver circuitry present in device or used in design
+
+
++------------------------------------------------+
+; Unconstrained Paths Summary                    ;
++---------------------------------+-------+------+
+; Property                        ; Setup ; Hold ;
++---------------------------------+-------+------+
+; Illegal Clocks                  ; 0     ; 0    ;
+; Unconstrained Clocks            ; 0     ; 0    ;
+; Unconstrained Input Ports       ; 5     ; 5    ;
+; Unconstrained Input Port Paths  ; 27    ; 27   ;
+; Unconstrained Output Ports      ; 19    ; 19   ;
+; Unconstrained Output Port Paths ; 19    ; 19   ;
++---------------------------------+-------+------+
+
+
++--------------------------------------+
+; Clock Status Summary                 ;
++--------+--------+------+-------------+
+; Target ; Clock  ; Type ; Status      ;
++--------+--------+------+-------------+
+; clock0 ; clock0 ; Base ; Constrained ;
+; clock1 ; clock1 ; Base ; Constrained ;
++--------+--------+------+-------------+
+
+
++-----------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                           ;
++--------------+--------------------------------------------------------------------------------------+
+; Input Port   ; Comment                                                                              ;
++--------------+--------------------------------------------------------------------------------------+
+; buttons[0]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; buttons[1]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; buttons[2]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; buttons[3]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; reset_button ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++--------------+--------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------+
+; Unconstrained Output Ports                                                                                ;
++-------------------+---------------------------------------------------------------------------------------+
+; Output Port       ; Comment                                                                               ;
++-------------------+---------------------------------------------------------------------------------------+
+; led_col_green[0]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_col_green[1]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_col_green[2]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_col_green[3]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_col_green[4]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_col_red[0]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_col_red[1]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_col_red[2]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_col_red[3]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_col_red[4]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_row[0]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_row[1]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_row[2]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_row[3]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_row[4]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_row[5]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_row[6]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_segments[0] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_segments[1] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
++-------------------+---------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------+
+; Unconstrained Input Ports                                                                           ;
++--------------+--------------------------------------------------------------------------------------+
+; Input Port   ; Comment                                                                              ;
++--------------+--------------------------------------------------------------------------------------+
+; buttons[0]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; buttons[1]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; buttons[2]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; buttons[3]   ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; reset_button ; No input delay, min/max delays, false-path exceptions, or max skew assignments found ;
++--------------+--------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------+
+; Unconstrained Output Ports                                                                                ;
++-------------------+---------------------------------------------------------------------------------------+
+; Output Port       ; Comment                                                                               ;
++-------------------+---------------------------------------------------------------------------------------+
+; led_col_green[0]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_col_green[1]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_col_green[2]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_col_green[3]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_col_green[4]  ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_col_red[0]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_col_red[1]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_col_red[2]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_col_red[3]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_col_red[4]    ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_row[0]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_row[1]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_row[2]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_row[3]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_row[4]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_row[5]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; led_row[6]        ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_segments[0] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
+; seven_segments[1] ; No output delay, min/max delays, false-path exceptions, or max skew assignments found ;
++-------------------+---------------------------------------------------------------------------------------+
+
+
++--------------------------+
+; Timing Analyzer Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+    Info: Processing started: Tue May 07 09:37:05 2024
+Info: Command: quartus_sta ramses -c ramses
+Info: qsta_default_script.tcl version: #1
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
+Info (21077): Low junction temperature is 0 degrees C
+Info (21077): High junction temperature is 85 degrees C
+Info (334003): Started post-fitting delay annotation
+Info (334004): Delay annotation completed successfully
+Critical Warning (332012): Synopsys Design Constraints File file not found: 'ramses.sdc'. A Synopsys Design Constraints File is required by the Timing Analyzer to get proper timing constraints. Without it, the Compiler will not properly optimize the design.
+Info (332142): No user constrained base clocks found in the design. Calling "derive_clocks -period 1.0"
+Info (332105): Deriving Clocks
+    Info (332105): create_clock -period 1.000 -name clock0 clock0
+    Info (332105): create_clock -period 1.000 -name clock1 clock1
+Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
+Info: Can't run Report Timing Closure Recommendations. The current device family is not supported.
+Critical Warning (332148): Timing requirements not met
+Info (332146): Worst-case setup slack is -29.529
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):   -29.529            -688.348 clock1 
+    Info (332119):   -24.993            -405.589 clock0 
+Info (332146): Worst-case hold slack is 3.156
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     3.156               0.000 clock0 
+    Info (332119):     3.410               0.000 clock1 
+Info (332140): No Recovery paths to report
+Info (332140): No Removal paths to report
+Info (332146): Worst-case minimum pulse width slack is -2.289
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):    -2.289              -2.289 clock0 
+    Info (332119):    -2.289              -2.289 clock1 
+Info (332001): The selected device family is not supported by the report_metastability command.
+Info (332102): Design is not fully constrained for setup requirements
+Info (332102): Design is not fully constrained for hold requirements
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 3 warnings
+    Info: Peak virtual memory: 4671 megabytes
+    Info: Processing ended: Tue May 07 09:37:06 2024
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:01
+
+
